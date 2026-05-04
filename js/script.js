@@ -277,7 +277,9 @@ document.getElementById('ctaForm').addEventListener('submit', function (e) {
     var scrollY = window.scrollY + 80;
     var current = -1;
     sections.forEach(function (sec, i) {
-      if (sec && sec.offsetTop <= scrollY) current = i;
+      if (!sec) return;
+      var top = sec.getBoundingClientRect().top + window.scrollY;
+      if (top <= scrollY) current = i;
     });
     navLinks.forEach(function (l, i) {
       l.classList.toggle('is-active', i === current);
