@@ -1417,7 +1417,105 @@ section.stack-panel {
 .hero-cta-row   { justify-content: center; }
 
 /* ── 섹션 구분 점선 제거 ── */
-.section-divider { display: none; }
+.section-divider { display: none !important; }
+
+/* ── Hero 서브카피 ↔ CTA 간격 ── */
+.hero-sub { margin-bottom: 64px; }
+
+/* ── Tech Gallery (Apple-style 4-block) ── */
+.tech-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.tech-block {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 2px solid var(--border-light);
+  cursor: pointer;
+  background: var(--white);
+  transition: border-color var(--dur-mid) var(--ease-out),
+              box-shadow    var(--dur-mid) var(--ease-out),
+              transform     var(--dur-fast) var(--ease-out);
+}
+
+.tech-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(93, 45, 0, 0.10);
+}
+
+.tech-block.is-active {
+  border-color: var(--text-brown);
+  box-shadow: 0 8px 32px rgba(93, 45, 0, 0.14);
+  transform: translateY(-4px);
+}
+
+.tech-block-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.tech-block-img--1 { background: linear-gradient(160deg, #fffccd, #ffe87a); }
+.tech-block-img--2 { background: linear-gradient(160deg, #fff9e6, #ffd490); }
+.tech-block-img--3 { background: linear-gradient(160deg, #f0f9ff, #c8e8ff); }
+.tech-block-img--4 { background: linear-gradient(160deg, #f0fff4, #a8f0c0); }
+
+.tech-block-foot {
+  padding: 20px 20px 24px;
+  border-top: 1px solid var(--border-light);
+}
+
+.tech-block-num {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.tech-block-name {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text-black);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.tech-block-sub {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* 클릭 시 나타나는 설명 패널 */
+.tech-detail {
+  background: var(--bg-cream);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 24px 32px;
+  margin-bottom: 20px;
+  min-height: 68px;
+}
+
+.tech-detail-pane {
+  display: none;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--text-brown);
+}
+
+.tech-detail-pane.is-active {
+  display: block;
+  animation: fadeUp 0.35s var(--ease-out) forwards;
+}
+
+@media (max-width: 768px) {
+  .tech-gallery { grid-template-columns: repeat(2, 1fr); }
+  .tech-block-img { aspect-ratio: 3 / 2; }
+}
 
 /* ── Section Headline 크기 상향 ── */
 .section-headline {

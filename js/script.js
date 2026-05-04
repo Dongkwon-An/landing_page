@@ -56,19 +56,19 @@
   update();
 })();
 
-/* ── S3-A: Accordion Panels ── */
+/* ── S3-A: Tech Gallery Blocks ── */
 (function () {
-  var panels = Array.from(document.querySelectorAll('.tech-panel'));
+  var blocks = Array.from(document.querySelectorAll('.tech-block'));
+  var panes  = Array.from(document.querySelectorAll('.tech-detail-pane'));
+  if (!blocks.length) return;
 
-  function activate(panel) {
-    panels.forEach(function (p) { p.classList.remove('is-active'); });
-    panel.classList.add('is-active');
+  function activate(idx) {
+    blocks.forEach(function (b, i) { b.classList.toggle('is-active', i === idx); });
+    panes.forEach(function (p, i)  { p.classList.toggle('is-active', i === idx); });
   }
 
-  panels.forEach(function (p) {
-    p.addEventListener('mouseenter', function () { activate(p); });
-    p.addEventListener('focus',      function () { activate(p); });
-    p.addEventListener('click',      function () { activate(p); });
+  blocks.forEach(function (b, i) {
+    b.addEventListener('click', function () { activate(i); });
   });
 })();
 
