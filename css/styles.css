@@ -1425,18 +1425,26 @@ section.stack-panel {
 /* ── Tech Gallery: 2-up 슬라이더 ── */
 .tech-gallery-wrap {
   overflow: hidden;
+  width: 100%;
   margin-bottom: 12px;
 }
 
 .tech-gallery-track {
   display: flex;
-  gap: 20px;
+  will-change: transform;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 아이템: 항상 2개 표시 */
+/* 페이지: 래퍼와 동일한 너비, 내부에 2열 */
+.tech-gallery-page {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* 아이템 */
 .tech-item {
-  flex: 0 0 calc(50% - 10px);
   display: flex;
   flex-direction: column;
   gap: 14px;

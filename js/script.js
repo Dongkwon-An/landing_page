@@ -58,22 +58,22 @@
 
 /* ── S3-A: Tech Gallery 2-up 슬라이더 ── */
 (function () {
+  var wrap    = document.getElementById('techGalleryWrap');
   var track   = document.getElementById('techGalleryTrack');
   var items   = Array.from(document.querySelectorAll('.tech-item'));
   var panes   = Array.from(document.querySelectorAll('.tech-detail-pane'));
   var prevBtn = document.getElementById('techGalleryPrev');
   var nextBtn = document.getElementById('techGalleryNext');
-  if (!track || !items.length) return;
+  if (!wrap || !track) return;
 
-  var page = 0; /* 0 = 01·02 표시, 1 = 03·04 표시 */
+  var page = 0;
 
   function slideTo(p) {
     page = Math.max(0, Math.min(1, p));
-    var itemW = items[0].offsetWidth;
-    var gap   = 20;
-    track.style.transform = 'translateX(-' + (page * 2 * (itemW + gap)) + 'px)';
-    if (prevBtn) prevBtn.disabled = (page === 0);
-    if (nextBtn) nextBtn.disabled = (page === 1);
+    /* 래퍼의 실제 픽셀 너비만큼 이동 — 항상 정확 */
+    track.style.transform = 'translateX(-' + (page * wrap.offsetWidth) + 'px)';
+    prevBtn.disabled = (page === 0);
+    nextBtn.disabled = (page === 1);
   }
 
   function activateItem(idx) {
@@ -85,8 +85,11 @@
     b.addEventListener('click', function () { activateItem(i); });
   });
 
-  if (prevBtn) prevBtn.addEventListener('click', function () { slideTo(page - 1); });
-  if (nextBtn) nextBtn.addEventListener('click', function () { slideTo(page + 1); });
+  prevBtn.addEventListener('click', function () { slideTo(page - 1); });
+  nextBtn.addEventListener('click', function () { slideTo(page + 1); });
+
+  /* 창 크기 바뀌면 현재 페이지 위치 재계산 */
+  window.addEventListener('resize', function () { slideTo(page); }, { passive: true });
 
   slideTo(0);
 })();
