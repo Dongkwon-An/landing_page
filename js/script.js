@@ -56,20 +56,39 @@
   update();
 })();
 
-/* ── S3-A: Tech Gallery Blocks ── */
+/* ── S3-A: Tech Gallery 2-up 슬라이더 ── */
 (function () {
-  var items = Array.from(document.querySelectorAll('.tech-item'));
-  var panes = Array.from(document.querySelectorAll('.tech-detail-pane'));
-  if (!items.length) return;
+  var track   = document.getElementById('techGalleryTrack');
+  var items   = Array.from(document.querySelectorAll('.tech-item'));
+  var panes   = Array.from(document.querySelectorAll('.tech-detail-pane'));
+  var prevBtn = document.getElementById('techGalleryPrev');
+  var nextBtn = document.getElementById('techGalleryNext');
+  if (!track || !items.length) return;
 
-  function activate(idx) {
+  var page = 0; /* 0 = 01·02 표시, 1 = 03·04 표시 */
+
+  function slideTo(p) {
+    page = Math.max(0, Math.min(1, p));
+    var itemW = items[0].offsetWidth;
+    var gap   = 20;
+    track.style.transform = 'translateX(-' + (page * 2 * (itemW + gap)) + 'px)';
+    if (prevBtn) prevBtn.disabled = (page === 0);
+    if (nextBtn) nextBtn.disabled = (page === 1);
+  }
+
+  function activateItem(idx) {
     items.forEach(function (b, i) { b.classList.toggle('is-active', i === idx); });
     panes.forEach(function (p, i) { p.classList.toggle('is-active', i === idx); });
   }
 
   items.forEach(function (b, i) {
-    b.addEventListener('click', function () { activate(i); });
+    b.addEventListener('click', function () { activateItem(i); });
   });
+
+  if (prevBtn) prevBtn.addEventListener('click', function () { slideTo(page - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { slideTo(page + 1); });
+
+  slideTo(0);
 })();
 
 /* ── S3-B: Onboarding Slider ── */

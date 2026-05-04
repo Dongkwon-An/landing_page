@@ -95,47 +95,57 @@
       <div class="stack-scene">
         <div class="tech-sub stack-panel">
           <h3 class="tech-sub-headline js-reveal">아이의 몸이 보내는 신호를 감정의 언어로 바꾸는 과정</h3>
-          <div class="tech-gallery">
-            <div class="tech-item is-active" data-idx="0">
-              <div class="tech-card">
-                <div class="tech-block-img tech-block-img--1"></div>
+          <div class="tech-gallery-wrap">
+            <div class="tech-gallery-track" id="techGalleryTrack">
+              <div class="tech-item is-active" data-idx="0">
+                <div class="tech-card">
+                  <div class="tech-block-img"></div>
+                </div>
+                <div class="tech-caption">
+                  <span class="tech-block-num">01</span>
+                  <div class="tech-block-name">하루 신호 수집.</div>
+                  <div class="tech-block-sub">심박·피부전도 측정</div>
+                </div>
               </div>
-              <div class="tech-caption">
-                <span class="tech-block-num">01</span>
-                <div class="tech-block-name">하루 신호 수집.</div>
-                <div class="tech-block-sub">심박·피부전도 측정</div>
+              <div class="tech-item" data-idx="1">
+                <div class="tech-card">
+                  <div class="tech-block-img"></div>
+                </div>
+                <div class="tech-caption">
+                  <span class="tech-block-num">02</span>
+                  <div class="tech-block-name">노이즈 제거.</div>
+                  <div class="tech-block-sub">데이터 정제</div>
+                </div>
+              </div>
+              <div class="tech-item" data-idx="2">
+                <div class="tech-card">
+                  <div class="tech-block-img"></div>
+                </div>
+                <div class="tech-caption">
+                  <span class="tech-block-num">03</span>
+                  <div class="tech-block-name">무드미터 분석.</div>
+                  <div class="tech-block-sub">감정 좌표화</div>
+                </div>
+              </div>
+              <div class="tech-item" data-idx="3">
+                <div class="tech-card">
+                  <div class="tech-block-img"></div>
+                </div>
+                <div class="tech-caption">
+                  <span class="tech-block-num">04</span>
+                  <div class="tech-block-name">맞춤 미션 생성.</div>
+                  <div class="tech-block-sub">AI 추천</div>
+                </div>
               </div>
             </div>
-            <div class="tech-item" data-idx="1">
-              <div class="tech-card">
-                <div class="tech-block-img tech-block-img--2"></div>
-              </div>
-              <div class="tech-caption">
-                <span class="tech-block-num">02</span>
-                <div class="tech-block-name">노이즈 제거.</div>
-                <div class="tech-block-sub">데이터 정제</div>
-              </div>
-            </div>
-            <div class="tech-item" data-idx="2">
-              <div class="tech-card">
-                <div class="tech-block-img tech-block-img--3"></div>
-              </div>
-              <div class="tech-caption">
-                <span class="tech-block-num">03</span>
-                <div class="tech-block-name">무드미터 분석.</div>
-                <div class="tech-block-sub">감정 좌표화</div>
-              </div>
-            </div>
-            <div class="tech-item" data-idx="3">
-              <div class="tech-card">
-                <div class="tech-block-img tech-block-img--4"></div>
-              </div>
-              <div class="tech-caption">
-                <span class="tech-block-num">04</span>
-                <div class="tech-block-name">맞춤 미션 생성.</div>
-                <div class="tech-block-sub">AI 추천</div>
-              </div>
-            </div>
+          </div>
+          <div class="tech-gallery-controls">
+            <button class="tech-gallery-arrow" id="techGalleryPrev" aria-label="이전" disabled>
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <button class="tech-gallery-arrow" id="techGalleryNext" aria-label="다음">
+              <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
           </div>
           <div class="tech-detail">
             <div class="tech-detail-pane is-active">팔찌 센서가 심박수(HR), 심박변이도(HRV), 피부전도반응(GSR)을 실시간으로 측정합니다.</div>
