@@ -190,7 +190,7 @@ document.getElementById('ctaForm').addEventListener('submit', function (e) {
   var track   = document.querySelector('.trust-track');
   if (!track) return;
 
-  var PX_PER_SEC = 60;
+  var PX_PER_SEC = 45;
   var offset    = 0;
   var loopWidth = 0;
   var lastStamp = null;
@@ -239,4 +239,43 @@ document.getElementById('ctaForm').addEventListener('submit', function (e) {
     lastStamp = stamp;
     requestAnimationFrame(step);
   });
+})();
+
+/* ── Navigation: Scroll Spy + Hamburger ── */
+(function () {
+  var navLinks  = Array.from(document.querySelectorAll('.nav-link[data-section]'));
+  var hamburger = document.getElementById('navHamburger');
+  var navMenu   = document.getElementById('navLinks');
+  var sections  = navLinks.map(function (l) {
+    return document.getElementById(l.dataset.section);
+  });
+
+  function updateSpy() {
+    var scrollY = window.scrollY + 80;
+    var current = -1;
+    sections.forEach(function (sec, i) {
+      if (sec && sec.offsetTop <= scrollY) current = i;
+    });
+    navLinks.forEach(function (l, i) {
+      l.classList.toggle('is-active', i === current);
+    });
+  }
+
+  window.addEventListener('scroll', updateSpy, { passive: true });
+  updateSpy();
+
+  if (hamburger && navMenu) {
+    hamburger.addEventListener('click', function () {
+      var open = navMenu.classList.toggle('is-open');
+      hamburger.classList.toggle('is-open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+    });
+    navMenu.querySelectorAll('.nav-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navMenu.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 })();
