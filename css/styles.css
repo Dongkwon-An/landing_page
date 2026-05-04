@@ -1378,56 +1378,11 @@ section.stack-panel {
 }
 
 /* ═══════════════════════════════════════════════
-   APPLE-STYLE REDESIGN — Dark / Light Alternation
+   APPLE-STYLE REDESIGN — White / Light
    ═══════════════════════════════════════════════ */
 
-/* ── 다크 팔레트 토큰 ── */
-:root {
-  --dark-bg:       #0d0700;
-  --dark-text:     #fffae9;
-  --dark-muted:    rgba(255, 250, 230, 0.60);
-  --dark-border:   rgba(255, 228, 141, 0.13);
-  --dark-glass:    rgba(255, 228, 141, 0.06);
-  --amber-accent:  rgba(255, 228, 141, 0.78);
-}
-
-/* ── Navigation → 다크 반투명 ── */
-.nav {
-  background: rgba(10, 5, 0, 0.86);
-  border-bottom: 1px solid var(--dark-border);
-}
-
-.nav-logo { color: var(--dark-text); }
-
-.nav-link {
-  color: rgba(255, 250, 230, 0.50);
-}
-
-.nav-link:hover {
-  color: var(--dark-text);
-  background: rgba(255, 228, 141, 0.09);
-}
-
-.nav-link.is-active { color: var(--dark-text); }
-
-.nav-hamburger span { background: var(--dark-text); }
-
-@media (max-width: 900px) {
-  .nav-links {
-    background: rgba(10, 5, 0, 0.97);
-    border-bottom-color: var(--dark-border);
-  }
-  .nav-link { color: rgba(255, 250, 230, 0.65); }
-}
-
-/* ── Hero → 다크 배경 + 중앙 정렬 ── */
-.hero { background: var(--dark-bg); }
-
-.hero-veil {
-  background:
-    linear-gradient(135deg, rgba(255, 228, 141, 0.05) 0%, transparent 55%),
-    linear-gradient(315deg, rgba(255, 82, 8, 0.04) 0%, transparent 55%);
-}
+/* ── Hero → 밝은 크림 + 중앙 정렬 ── */
+.hero { background: var(--bg-cream); }
 
 .hero-inner {
   justify-content: center;
@@ -1445,10 +1400,7 @@ section.stack-panel {
   align-items: center;
 }
 
-.hero-label { color: var(--amber-accent); }
-
 .hero-headline {
-  color: var(--dark-text);
   font-size: clamp(52px, 8vw, 104px);
   letter-spacing: -4px;
   font-weight: 800;
@@ -1456,7 +1408,6 @@ section.stack-panel {
 }
 
 .hero-sub {
-  color: var(--dark-muted);
   font-size: 19px;
   margin-bottom: 40px;
   max-width: 560px;
@@ -1465,19 +1416,7 @@ section.stack-panel {
 .hero-form-wrap { opacity: 0; animation: fadeUp 0.6s ease 600ms forwards; }
 .hero-cta-row   { justify-content: center; }
 
-/* Ghost 버튼: 다크 히어로 전용 */
-.hero .btn-ghost {
-  color: var(--dark-text);
-  border-color: rgba(255, 250, 230, 0.30);
-}
-.hero .btn-ghost:hover {
-  background: rgba(255, 250, 230, 0.08);
-  border-color: rgba(255, 250, 230, 0.62);
-}
-
-.hero-scroll-hint { color: rgba(255, 250, 230, 0.35); }
-
-/* ── 섹션 구분 점선: 다크 전환 후 불필요 ── */
+/* ── 섹션 구분 점선 제거 ── */
 .section-divider { display: none; }
 
 /* ── Section Headline 크기 상향 ── */
@@ -1487,156 +1426,43 @@ section.stack-panel {
   line-height: 1.18;
 }
 
-/* ── Problem: 크림 유지, 텍스트 확대 ── */
-.problem { background: var(--bg-cream); }
-
+/* ── Problem ── */
 .problem-sentence {
   font-size: clamp(26px, 3vw, 38px);
   line-height: 1.52;
   letter-spacing: -0.5px;
 }
 
-/* ── Technology → 다크 배경 ── */
+/* ── Technology: 배경 화이트 ── */
 .technology {
-  background: var(--dark-bg);
+  background: var(--white);
   border-radius: 0;
 }
 
-.technology .section-headline  { color: var(--dark-text); }
-.technology .label             { color: var(--amber-accent); }
-.technology .tech-sub-headline {
-  color: var(--dark-text);
+.tech-sub-headline {
   font-size: clamp(24px, 2.8vw, 36px);
 }
 
-/* 아코디언 패널 (다크) */
-.tech-panel {
-  background: var(--dark-glass);
-  border-color: var(--dark-border);
-  box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.40),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
+/* tech-panel-title 줄바꿈 허용 */
+.tech-panel-title { white-space: normal; }
 
-.tech-panel.is-active {
-  background: rgba(255, 228, 141, 0.11);
-  border-color: rgba(255, 228, 141, 0.24);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.50),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-.tech-panel-title { color: var(--dark-text); white-space: normal; }
-.tech-panel-desc  { color: var(--dark-muted); }
-
-.tech-note {
-  background: var(--dark-glass);
-  border-color: var(--dark-border);
-  color: var(--dark-muted);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.30);
-}
-.tech-note strong { color: var(--dark-text); }
-
-/* 온보딩 슬라이더 (다크) */
-.onboarding-card {
-  background: rgba(255, 228, 141, 0.06);
-  border-color: var(--dark-border);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-}
-
-.onboarding-img {
-  background: rgba(255, 228, 141, 0.10);
-  border-bottom-color: var(--dark-border);
-}
-
-.onboarding-title { color: var(--dark-text); }
-.onboarding-desc  { color: var(--dark-muted); }
-
-.onboarding-arrow {
-  background: rgba(255, 228, 141, 0.08);
-  border-color: var(--dark-border);
-  color: var(--dark-text);
-}
-.onboarding-arrow:hover {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: var(--text-brown);
-}
-
-.onboarding-dot { background: rgba(255, 250, 230, 0.20); }
-.onboarding-dot.is-active { background: var(--primary); }
-
-/* FAQ (다크) */
-.faq-grid { border-top-color: var(--dark-border); }
-
-.faq-block {
-  background: var(--dark-glass);
-  border-color: var(--dark-border);
-}
-.faq-block:hover { background: rgba(255, 228, 141, 0.11); }
-
-.faq-q { color: var(--dark-text); }
-.faq-a { color: var(--dark-muted); }
-
-/* 보드 스텝 (다크) */
-.step-label { color: rgba(255, 228, 141, 0.60); }
-.step-title  { color: var(--dark-text); }
-.step-body   { color: var(--dark-muted); }
-
-/* ── Features: 크림 배경 (다크 섹션과 대비) ── */
-.features {
-  background: #fffae9;
-  padding: 120px 0;
-}
+/* ── Features: 섹션 여백 증가 ── */
+.features { padding: 120px 0; }
 .feature-quote { font-size: 24px; }
 
-/* ── Trust → 다크 배경 ── */
-.trust {
-  background: var(--dark-bg);
-  padding: 120px 0;
-}
-
-.trust .section-headline { color: var(--dark-text); }
-.trust .label            { color: var(--amber-accent); }
-
-.trust-block           { border-right-color: var(--dark-border); }
-.trust-block:first-child { padding-left: 0; }
-.trust-block-label     { color: rgba(255, 228, 141, 0.62); }
-.trust-block-text      { color: var(--dark-muted); }
-
-.trust-interviews-label { color: rgba(255, 250, 230, 0.42); }
-.trust-interviews-line  { background: var(--dark-border); }
-
-.trust-quote-card {
-  background: rgba(255, 228, 141, 0.06);
-  border-color: var(--dark-border);
-}
-.trust-quote-card:hover {
-  box-shadow: 0 8px 28px rgba(255, 228, 141, 0.10);
-}
-
-.trust-quote-text   { color: var(--dark-muted); }
-.trust-quote-author { color: var(--dark-text); }
-.trust-quote-meta   { color: rgba(255, 250, 230, 0.36); }
-.trust-quote-footer { border-top-color: var(--dark-border); }
+/* ── Trust: 배경 화이트 ── */
+.trust { padding: 120px 0; }
 
 /* ── CTA: 여백 증가 ── */
 .cta-section { padding: 120px 0; }
 .cta-headline { font-size: 36px; }
 
-/* ── Footer → 다크 ── */
-.footer {
-  background: var(--dark-bg);
-  border-top-color: var(--dark-border);
-  color: rgba(255, 250, 230, 0.28);
-}
-
-/* ── 반응형 다크 보정 ── */
+/* ── 반응형 ── */
 @media (max-width: 768px) {
-  .hero-headline  { letter-spacing: -2px; }
+  .hero-headline    { letter-spacing: -2px; }
   .section-headline { letter-spacing: -0.8px; }
-  .hero-sub { font-size: 17px; }
-  .features { padding: 80px 0; }
-  .trust    { padding: 80px 0; }
-  .cta-section { padding: 80px 0; }
+  .hero-sub         { font-size: 17px; }
+  .features         { padding: 80px 0; }
+  .trust            { padding: 80px 0; }
+  .cta-section      { padding: 80px 0; }
 }
