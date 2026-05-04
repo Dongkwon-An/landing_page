@@ -58,16 +58,16 @@
 
 /* ── S3-A: Tech Gallery Blocks ── */
 (function () {
-  var blocks = Array.from(document.querySelectorAll('.tech-block'));
-  var panes  = Array.from(document.querySelectorAll('.tech-detail-pane'));
-  if (!blocks.length) return;
+  var items = Array.from(document.querySelectorAll('.tech-item'));
+  var panes = Array.from(document.querySelectorAll('.tech-detail-pane'));
+  if (!items.length) return;
 
   function activate(idx) {
-    blocks.forEach(function (b, i) { b.classList.toggle('is-active', i === idx); });
-    panes.forEach(function (p, i)  { p.classList.toggle('is-active', i === idx); });
+    items.forEach(function (b, i) { b.classList.toggle('is-active', i === idx); });
+    panes.forEach(function (p, i) { p.classList.toggle('is-active', i === idx); });
   }
 
-  blocks.forEach(function (b, i) {
+  items.forEach(function (b, i) {
     b.addEventListener('click', function () { activate(i); });
   });
 })();
