@@ -1423,10 +1423,19 @@ section.stack-panel {
 .hero-sub { margin-bottom: 64px; }
 
 /* ── Tech Gallery: 2-up 슬라이더 ── */
+
+/* 슬라이더 + 화살표 가로 배치 */
+.tech-gallery-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
 .tech-gallery-wrap {
   overflow: hidden;
-  width: 100%;
-  margin-bottom: 12px;
+  flex: 1;
+  min-width: 0;
 }
 
 .tech-gallery-track {
@@ -1435,20 +1444,29 @@ section.stack-panel {
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 페이지: JS가 너비를 픽셀로 주입, 내부에 2열 */
+/* 페이지: JS가 너비 주입, 내부 2열 */
 .tech-gallery-page {
   flex-shrink: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 16px;
 }
 
 /* 아이템 */
 .tech-item {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
   cursor: pointer;
+}
+
+/* 화살표: 슬라이더 옆 세로 배치 */
+.tech-gallery-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 4px;
+  flex-shrink: 0;
 }
 
 /* 카드: 이미지 블럭만 */
@@ -1472,10 +1490,10 @@ section.stack-panel {
   transform: translateY(-5px);
 }
 
-/* 가로형 이미지 블럭 — 단일 옐로우 */
+/* 가로형 이미지 블럭 — 단일 옐로우, 높이 제한 */
 .tech-block-img {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 180px;
   display: block;
   background: linear-gradient(145deg, #fffccd 0%, #ffe048 100%);
 }
@@ -1508,14 +1526,6 @@ section.stack-panel {
 }
 
 .tech-item.is-active .tech-block-name { color: var(--text-brown); }
-
-/* 화살표 컨트롤 */
-.tech-gallery-controls {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-bottom: 20px;
-}
 
 .tech-gallery-arrow {
   display: flex;
