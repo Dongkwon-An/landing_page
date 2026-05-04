@@ -61,15 +61,12 @@
   var wrap    = document.getElementById('techGalleryWrap');
   var track   = document.getElementById('techGalleryTrack');
   var pages   = Array.from(track ? track.querySelectorAll('.tech-gallery-page') : []);
-  var items   = Array.from(document.querySelectorAll('.tech-item'));
-  var panes   = Array.from(document.querySelectorAll('.tech-detail-pane'));
   var prevBtn = document.getElementById('techGalleryPrev');
   var nextBtn = document.getElementById('techGalleryNext');
   if (!wrap || !track || !pages.length) return;
 
   var page = 0;
 
-  /* 래퍼 너비를 픽셀로 각 페이지와 트랙에 직접 주입 */
   function setup() {
     var w = wrap.offsetWidth;
     pages.forEach(function (p) { p.style.width = w + 'px'; });
@@ -82,15 +79,6 @@
     prevBtn.disabled = (page === 0);
     nextBtn.disabled = (page === pages.length - 1);
   }
-
-  function activateItem(idx) {
-    items.forEach(function (b, i) { b.classList.toggle('is-active', i === idx); });
-    panes.forEach(function (p, i) { p.classList.toggle('is-active', i === idx); });
-  }
-
-  items.forEach(function (b, i) {
-    b.addEventListener('click', function () { activateItem(i); });
-  });
 
   prevBtn.addEventListener('click', function () { slideTo(page - 1); });
   nextBtn.addEventListener('click', function () { slideTo(page + 1); });
