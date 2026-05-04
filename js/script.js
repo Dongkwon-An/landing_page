@@ -91,41 +91,47 @@
 
 /* ── S3-B: Onboarding Slider ── */
 (function () {
+  var viewport = document.querySelector('.onboarding-viewport');
   var track    = document.getElementById('onboardingTrack');
   var cards    = Array.from(track.querySelectorAll('.onboarding-card'));
   var dotsWrap = document.getElementById('onboardingDots');
   var prevBtn  = document.getElementById('onboardingPrev');
   var nextBtn  = document.getElementById('onboardingNext');
   var cur      = 0;
-  var timer    = null;
+
+  /* 카드 너비를 뷰포트와 동일하게 명시 주입 → 이미지+텍스트 함께 이동 */
+  function setup() {
+    var w = viewport.offsetWidth;
+    cards.forEach(function (c) { c.style.flex = '0 0 ' + w + 'px'; });
+    track.style.width = (w * cards.length) + 'px';
+  }
 
   var dots = cards.map(function (_, i) {
     var btn = document.createElement('button');
     btn.className = 'onboarding-dot';
     btn.setAttribute('aria-label', (i + 1) + '번 슬라이드');
-    btn.addEventListener('click', function () { slideTo(i); resetTimer(); });
+    btn.addEventListener('click', function () { slideTo(i); });
     dotsWrap.appendChild(btn);
     return btn;
   });
 
   function slideTo(idx) {
-    cur = ((idx % cards.length) + cards.length) % cards.length;
-    var cardW = cards[0].offsetWidth + 14;
-    track.style.transform  = 'translateX(' + (-cur * cardW) + 'px)';
+    cur = Math.max(0, Math.min(cards.length - 1, idx));
+    var w = viewport.offsetWidth;
+    track.style.transform  = 'translateX(' + (-cur * w) + 'px)';
     track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
     dots.forEach(function (d, i) { d.classList.toggle('is-active', i === cur); });
+    prevBtn.disabled = (cur === 0);
+    nextBtn.disabled = (cur === cards.length - 1);
   }
 
-  function resetTimer() {
-    clearInterval(timer);
-    timer = setInterval(function () { slideTo(cur + 1); }, 5000);
-  }
+  prevBtn.addEventListener('click', function () { slideTo(cur - 1); });
+  nextBtn.addEventListener('click', function () { slideTo(cur + 1); });
 
-  prevBtn.addEventListener('click', function () { slideTo(cur - 1); resetTimer(); });
-  nextBtn.addEventListener('click', function () { slideTo(cur + 1); resetTimer(); });
+  window.addEventListener('resize', function () { setup(); slideTo(cur); }, { passive: true });
 
+  setup();
   slideTo(0);
-  resetTimer();
 })();
 
 /* ── Technology Stacking Scroll ── */
