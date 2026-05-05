@@ -83,6 +83,49 @@
   prevBtn.addEventListener('click', function () { slideTo(page - 1); });
   nextBtn.addEventListener('click', function () { slideTo(page + 1); });
 
+  /* ── 터치: 드래그 중 실시간 이동 → 손 떼면 스냅 ── */
+  var touchStartX = 0;
+  var touchStartY = 0;
+  var dragging    = false;
+  var baseOffset  = 0;
+
+  wrap.addEventListener('touchstart', function (e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    baseOffset  = page * wrap.offsetWidth;
+    dragging    = false;
+  }, { passive: true });
+
+  wrap.addEventListener('touchmove', function (e) {
+    var dx = e.touches[0].clientX - touchStartX;
+    var dy = e.touches[0].clientY - touchStartY;
+    if (!dragging && Math.abs(dx) < Math.abs(dy)) return; /* 세로 스크롤이면 무시 */
+    dragging = true;
+    track.style.transition = 'none';
+    track.style.transform  = 'translateX(' + (-baseOffset + dx * 0.85) + 'px)';
+  }, { passive: true });
+
+  wrap.addEventListener('touchend', function (e) {
+    if (!dragging) return;
+    dragging = false;
+    track.style.transition = '';
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    slideTo(Math.abs(dx) > wrap.offsetWidth * 0.18 ? (dx < 0 ? page + 1 : page - 1) : page);
+  }, { passive: true });
+
+  /* ── 트랙패드 가로 스와이프: 즉시 반응 후 잠금 ── */
+  var wheelLocked = false;
+  wrap.addEventListener('wheel', function (e) {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    if (wheelLocked) return;
+    if (Math.abs(e.deltaX) > 8) {
+      slideTo(e.deltaX > 0 ? page + 1 : page - 1);
+      wheelLocked = true;
+      setTimeout(function () { wheelLocked = false; }, 550);
+    }
+  }, { passive: false });
+
   window.addEventListener('resize', function () { setup(); slideTo(page); }, { passive: true });
 
   setup();
