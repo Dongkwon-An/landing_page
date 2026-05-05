@@ -89,49 +89,39 @@
   slideTo(0);
 })();
 
-/* ── S3-B: Onboarding Slider ── */
+/* ── S3-B: Onboarding Scroll-Pin ── */
 (function () {
-  var viewport = document.querySelector('.onboarding-viewport');
-  var track    = document.getElementById('onboardingTrack');
-  var cards    = Array.from(track.querySelectorAll('.onboarding-card'));
-  var dotsWrap = document.getElementById('onboardingDots');
-  var prevBtn  = document.getElementById('onboardingPrev');
-  var nextBtn  = document.getElementById('onboardingNext');
-  var cur      = 0;
+  var pin    = document.querySelector('.onboarding-pin');
+  var panels = Array.from(document.querySelectorAll('.onboarding-panel'));
+  var dots   = Array.from(document.querySelectorAll('.onboarding-step-dot'));
+  if (!pin || !panels.length) return;
 
-  /* 카드 너비를 뷰포트와 동일하게 명시 주입 → 이미지+텍스트 함께 이동 */
-  function setup() {
-    var w = viewport.offsetWidth;
-    cards.forEach(function (c) { c.style.flex = '0 0 ' + w + 'px'; });
-    track.style.width = (w * cards.length) + 'px';
+  var current = 0;
+
+  function goTo(step) {
+    if (step === current) return;
+    var prev = current;
+    panels[prev].classList.remove('is-active');
+    panels[prev].classList.add('is-out');
+    (function (idx) {
+      setTimeout(function () { panels[idx].classList.remove('is-out'); }, 650);
+    })(prev);
+    current = step;
+    panels[current].classList.add('is-active');
+    dots.forEach(function (d, i) { d.classList.toggle('is-active', i === current); });
   }
 
-  var dots = cards.map(function (_, i) {
-    var btn = document.createElement('button');
-    btn.className = 'onboarding-dot';
-    btn.setAttribute('aria-label', (i + 1) + '번 슬라이드');
-    btn.addEventListener('click', function () { slideTo(i); });
-    dotsWrap.appendChild(btn);
-    return btn;
-  });
-
-  function slideTo(idx) {
-    cur = Math.max(0, Math.min(cards.length - 1, idx));
-    var w = viewport.offsetWidth;
-    track.style.transform  = 'translateX(' + (-cur * w) + 'px)';
-    track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-    dots.forEach(function (d, i) { d.classList.toggle('is-active', i === cur); });
-    prevBtn.disabled = (cur === 0);
-    nextBtn.disabled = (cur === cards.length - 1);
+  function update() {
+    var rect     = pin.getBoundingClientRect();
+    var scrolled = -rect.top;
+    var total    = pin.offsetHeight - window.innerHeight;
+    var progress = Math.max(0, Math.min(0.9999, scrolled / total));
+    var step     = Math.min(panels.length - 1, Math.floor(progress * panels.length));
+    goTo(step);
   }
 
-  prevBtn.addEventListener('click', function () { slideTo(cur - 1); });
-  nextBtn.addEventListener('click', function () { slideTo(cur + 1); });
-
-  window.addEventListener('resize', function () { setup(); slideTo(cur); }, { passive: true });
-
-  setup();
-  slideTo(0);
+  window.addEventListener('scroll', update, { passive: true });
+  update();
 })();
 
 /* ── Technology Stacking Scroll ── */
@@ -140,8 +130,10 @@
   if (!scenes.length) return;
 
   function setSizes() {
-    scenes.forEach(function (scene) {
+    scenes.forEach(function (scene, i) {
       var panel = scene.querySelector('.stack-panel');
+      var next  = scenes[i + 1];
+      if (!next) { scene.style.minHeight = ''; return; }
       scene.style.minHeight = (panel.offsetHeight + window.innerHeight * 0.38) + 'px';
     });
   }
@@ -261,6 +253,20 @@ document.getElementById('ctaForm').addEventListener('submit', function (e) {
     setup();
     lastStamp = stamp;
     requestAnimationFrame(step);
+  });
+})();
+
+/* ── "더 알아보기" → Problem 첫 문장 위치로 스크롤 ── */
+(function () {
+  var btn = document.querySelector('a.btn-ghost[href="#problem"]');
+  if (!btn) return;
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var section   = document.querySelector('.problem');
+    if (!section) return;
+    var sectionTop = section.getBoundingClientRect().top + window.scrollY;
+    var scrollable = section.offsetHeight - window.innerHeight;
+    window.scrollTo({ top: sectionTop + scrollable * 0.06, behavior: 'smooth' });
   });
 })();
 

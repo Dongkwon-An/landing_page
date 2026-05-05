@@ -56,7 +56,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
   color: var(--text-brown);
-  background: var(--white);
+  background: var(--bg-cream);
   font-size: 17px;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
@@ -492,7 +492,7 @@ h1, h2, .display-text {
 
 /* ── S3: TECHNOLOGY ── */
 .technology {
-  background: linear-gradient(160deg, #ffffff 0%, #fffef5 60%, #fffce8 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #fffef5 50%, #fffae9 100%);
   padding: 96px 0;
   border-radius: 24px 24px 0 0;
   position: relative;
@@ -601,106 +601,109 @@ h1, h2, .display-text {
 
 .tech-note strong { color: var(--text-black); }
 
-/* 3-B: Onboarding Slider */
-.onboarding-viewport {
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  margin-bottom: 28px;
+/* 3-B: Onboarding Pin */
+.onboarding-pin {
+  position: relative;
+  height: 300vh;
+  margin-bottom: 80px;
 }
 
-.onboarding-track {
+.onboarding-stage {
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 80px);
+  overflow: hidden;
   display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-direction: column;
+  padding-top: 40px;
 }
 
-.onboarding-card {
-  flex: 0 0 100%; /* JS가 픽셀 너비로 덮어씀 */
-  margin-right: 0;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(28px) saturate(1.8);
-  -webkit-backdrop-filter: blur(28px) saturate(1.8);
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.80);
-  box-shadow:
-    0 12px 48px rgba(0, 0, 0, 0.08),
-    inset 0 1.5px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -1px 0 rgba(93, 45, 0, 0.04);
+.onboarding-headline {
+  flex-shrink: 0;
+  margin-bottom: 28px !important;
+}
+
+.onboarding-panels {
+  position: relative;
+  flex: 1;
+}
+
+.onboarding-panel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.onboarding-panel.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.onboarding-panel.is-out {
+  opacity: 0;
+  transform: translateY(-36px);
+}
+
+.onboarding-left {
+  display: flex;
+  flex-direction: column;
 }
 
 .onboarding-img {
   width: 100%;
-  aspect-ratio: 16 / 9;
-  background: linear-gradient(145deg, #fffccd 0%, #ffe692 60%, #ffe048 100%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.50);
-}
-
-.onboarding-content {
-  padding: 36px 48px 44px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 2px solid var(--primary);
+  box-shadow: 0 8px 36px rgba(0, 0, 0, 0.10), 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .onboarding-num {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px; height: 36px;
+  width: 40px; height: 40px;
   background: var(--primary);
   border-radius: 50%;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 900;
   color: var(--text-brown);
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
-.onboarding-title { font-size: 20px; font-weight: 900; color: var(--text-black); margin-bottom: 10px; }
-.onboarding-desc  { font-size: 15px; font-weight: 600; line-height: 1.75; color: var(--text-secondary); }
+.onboarding-title { font-size: 32px; font-weight: 900; color: var(--text-black); margin-bottom: 16px; line-height: 1.25; }
+.onboarding-desc  { font-size: 16px; font-weight: 600; line-height: 1.8; color: var(--text-secondary); }
 
-.onboarding-controls {
+.onboarding-step-dots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 0;
+  gap: 10px;
 }
 
-.onboarding-nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.onboarding-dot {
+.onboarding-step-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
   background: var(--border-strong);
-  cursor: pointer;
-  transition: background var(--ease), transform var(--ease);
-  border: none;
-  padding: 0;
+  transition: background 0.3s, transform 0.3s;
 }
 
-.onboarding-dot.is-active {
+.onboarding-step-dot.is-active {
   background: var(--text-brown);
-  transform: scale(1.35);
-}
-
-.onboarding-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  border: 1.5px solid var(--border-strong);
-  background: var(--white);
-  color: var(--text-brown);
-  cursor: pointer;
-  transition: background var(--ease), border-color var(--ease), transform var(--ease);
-  flex-shrink: 0;
-}
-
-.onboarding-arrow:hover {
-  background: var(--primary);
-  border-color: var(--primary);
-  transform: scale(1.08);
+  transform: scale(1.4);
 }
 
 .faq-grid {
@@ -798,9 +801,9 @@ h1, h2, .display-text {
   animation-play-state: paused;
 }
 
-.step-visual--1 { background: linear-gradient(135deg, #fff9d0, #ffe87a); }
-.step-visual--2 { background: linear-gradient(135deg, #fff2dc, #ffd490); }
-.step-visual--3 { background: linear-gradient(135deg, #e8fff0, #a8f0c0); }
+.step-visual--1 { background: linear-gradient(135deg, #fffef5 0%, #fff8cc 100%); border: 2px solid var(--primary); }
+.step-visual--2 { background: linear-gradient(135deg, #fffaf4 0%, #ffe8b4 100%); border: 2px solid var(--primary); }
+.step-visual--3 { background: linear-gradient(135deg, #f4fffe 0%, #c6f0e4 100%); border: 2px solid var(--primary); }
 
 .step-content {
   opacity: 0;
@@ -871,14 +874,14 @@ h1, h2, .display-text {
 
 .feature-tag {
   display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-brown);
   border: 1px solid rgba(0,0,0,0.12);
   border-radius: 100px;
-  padding: 4px 12px;
+  padding: 6px 16px;
   align-self: flex-start;
 }
 
@@ -1166,6 +1169,15 @@ h1, h2, .display-text {
   padding-top: 80px;
 }
 
+.stack-scene--board {
+  background: linear-gradient(180deg, #fffef5 0%, #fff8cc 50%, #fffae9 100%);
+  padding-bottom: 48px;
+}
+
+.stack-scene--board .tech-sub-headline {
+  margin-bottom: 56px;
+}
+
 .stack-panel {
   position: sticky;
   top: 80px;
@@ -1398,9 +1410,8 @@ section.stack-panel {
 /* ── Hero → 채도 높은 그라디언트 + 좌측 정렬 ── */
 .hero {
   background:
-    radial-gradient(ellipse at 15% 25%, #ffed80 0%, transparent 55%),
-    radial-gradient(ellipse at 75% 80%, #ffc85a 0%, transparent 50%),
-    linear-gradient(135deg, #ffe060 0%, #ffd050 45%, #ffbc40 100%);
+    radial-gradient(ellipse at 92% 8%, rgba(255,255,255,0.92) 0%, transparent 30%),
+    linear-gradient(135deg, #ffe566 0%, #ffd040 60%, #ffaa50 80%, #ff9040 100%);
 }
 
 /* paint 블럭 & 베일 숨김 */
@@ -1428,11 +1439,12 @@ section.stack-panel {
 .hero-label { color: rgba(255, 255, 255, 0.75); }
 
 .hero-headline {
-  font-size: clamp(48px, 6.5vw, 96px);
-  letter-spacing: -3px;
+  font-size: clamp(36px, 5vw, 72px);
+  letter-spacing: -2px;
   font-weight: 900;
   color: var(--white);
   margin-bottom: 24px;
+  text-shadow: 0 2px 24px rgba(150, 50, 0, 0.28);
 }
 
 .hero-sub {
@@ -1440,6 +1452,7 @@ section.stack-panel {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.92);
   margin-bottom: 0;
+  text-shadow: 0 1px 14px rgba(150, 50, 0, 0.20);
   max-width: 540px;
   line-height: 1.65;
 }
@@ -1518,7 +1531,11 @@ section.stack-panel {
   width: 100%;
   aspect-ratio: 4 / 3;
   border-radius: var(--radius-lg);
-  background: linear-gradient(145deg, #fffccd 0%, #ffe048 100%);
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 2px solid var(--primary);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.09), 0 1px 4px rgba(0, 0, 0, 0.05);
   display: block;
 }
 
@@ -1600,9 +1617,9 @@ section.stack-panel {
   letter-spacing: -0.5px;
 }
 
-/* ── Technology: 배경 화이트 ── */
+/* ── Technology: 배경 그라데이션 ── */
 .technology {
-  background: var(--white);
+  background: linear-gradient(180deg, #ffffff 0%, #fffef5 40%, #fffae9 100%);
   border-radius: 0;
 }
 
@@ -1613,8 +1630,8 @@ section.stack-panel {
 /* tech-panel-title 줄바꿈 허용 */
 .tech-panel-title { white-space: normal; }
 
-/* ── Features: 섹션 여백 증가 ── */
-.features { padding: 120px 0; }
+/* ── Features: 섹션 여백 ── */
+.features { padding: 72px 0 120px; }
 .feature-quote { font-size: 24px; }
 
 /* ── Trust: 배경 화이트 ── */
