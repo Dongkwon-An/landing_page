@@ -30,26 +30,39 @@
   })();
 })();
 
-/* ── S2: Problem Sentences (sticky scroll) ── */
+/* ── S2: Problem Sentences (scroll-lit) ── */
 (function () {
   var section   = document.querySelector('.problem');
   var sentences = Array.from(document.querySelectorAll('.problem-sentence'));
   var n = sentences.length;
+  var autoScrollFired = false;
+  var lastProgress    = 0;
 
   function update() {
     var rect       = section.getBoundingClientRect();
     var scrollable = section.offsetHeight - window.innerHeight;
     if (scrollable <= 0) return;
-    var progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+    var progress     = Math.max(0, Math.min(1, -rect.top / scrollable));
+    var scrollingDown = progress > lastProgress;
+    lastProgress      = progress;
 
+    var current = -1;
     sentences.forEach(function (s, i) {
-      var threshold = (i / n) * 0.82 + 0.05;
-      if (progress >= threshold) {
-        s.classList.add('is-visible');
-      } else {
-        s.classList.remove('is-visible');
-      }
+      if (progress >= (i / n) * 0.82 + 0.05) current = i;
     });
+    sentences.forEach(function (s, i) {
+      s.classList.toggle('is-lit', i === current);
+    });
+
+    /* 마지막 문장 활성화 시 technology 섹션으로 자동 스크롤 */
+    if (current === n - 1 && scrollingDown && !autoScrollFired) {
+      autoScrollFired = true;
+      setTimeout(function () {
+        var tech = document.getElementById('technology');
+        if (tech) window.scrollTo({ top: tech.getBoundingClientRect().top + window.scrollY, behavior: 'smooth' });
+      }, 500);
+    }
+    if (progress < 0.5) autoScrollFired = false; /* 위로 스크롤 시 리셋 */
   }
 
   window.addEventListener('scroll', update, { passive: true });

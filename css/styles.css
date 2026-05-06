@@ -443,7 +443,7 @@ h1, h2, .display-text {
 /* ── S2: PROBLEM ── */
 .problem {
   height: 400vh;
-  background: var(--bg-cream);
+  background: var(--white);
   position: relative;
 }
 
@@ -458,35 +458,31 @@ h1, h2, .display-text {
 }
 
 .problem-sentences-wrap {
-  width: min(680px, 88vw);
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
+  width: min(1200px, 100%);
+  padding: 0 40px;
+  text-align: left;
 }
 
 .problem-sentence {
-  text-align: center;
+  display: inline;
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: clamp(24px, 2.4vw, 30px);
-  font-weight: 900;
-  line-height: 1.6;
+  font-size: clamp(18px, 1.9vw, 24px);
+  font-weight: 700;
+  line-height: 1.9;
+  color: rgba(0, 0, 0, 0.18);
+  transition: color 0.55s ease;
+}
+
+.problem-sentence.is-lit {
   color: var(--text-black);
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.problem-sentence.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-.problem-sentence:last-child {
-  white-space: normal;
 }
 
 .problem-sentence .color-pop {
+  color: rgba(0, 0, 0, 0.18);
+  transition: color 0.55s ease;
+}
+
+.problem-sentence.is-lit .color-pop {
   color: #e6a800;
 }
 
@@ -1611,10 +1607,11 @@ section.stack-panel {
 }
 
 /* ── Problem ── */
+
 .problem-sentence {
-  font-size: clamp(26px, 3vw, 38px);
-  line-height: 1.52;
-  letter-spacing: -0.5px;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 2;
+  letter-spacing: -0.3px;
 }
 
 /* ── Technology: 배경 그라데이션 ── */
