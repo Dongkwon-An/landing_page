@@ -22,12 +22,9 @@
           <a href="#features"   class="nav-link" data-section="features">핵심 기능</a>
           <a href="#trust"      class="nav-link" data-section="trust">검증된 근거</a>
         </nav>
-        <div class="nav-right">
-          <a href="#cta" class="nav-cta">사전 신청하기</a>
-          <button class="nav-hamburger" id="navHamburger" aria-label="메뉴 열기" aria-expanded="false">
-            <span></span><span></span><span></span>
-          </button>
-        </div>
+        <button class="nav-hamburger" id="navHamburger" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </nav>
@@ -60,17 +57,25 @@
       </div>
     </div>
 
+    <!-- 스크롤 다운 힌트 -->
+    <div class="hero-scroll-hint">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M10 4v12M4 10l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>스크롤</span>
+    </div>
+
   </section>
   <div class="section-divider"></div>
   <!-- S2: PROBLEM -->
   <section class="problem" id="problem">
     <div class="problem-sticky">
       <div class="problem-sentences-wrap">
-        <p class="problem-sentence">퇴근하고 들어오면 아이는 <br> 소파에서 유튜브를 보고 있습니다.</p>
-        <p class="problem-sentence">"오늘 어땠어?" "그냥요." <br> 오늘도 여기서 대화가 끊깁니다.</p>
-        <p class="problem-sentence">더 물어보고 싶은데, <br> 억지로 물어보면 더 닫힐 것 같습니다.</p>
-        <p class="problem-sentence">아이들은 언어보다 <span class="color-pop">감각</span>으로 먼저 말합니다.</p>
-        <p class="problem-sentence">필요한 것은 질문이 아니라 <span class="color-pop">함께하는&nbsp;15분</span>입니다.</p>
+        <span class="problem-sentence">퇴근하고 들어오면 아이는 <span class="color-pop">소파에서 유튜브를</span> 보고 있습니다.</span>
+        <span class="problem-sentence"> "오늘 어땠어?" <span class="color-pop">"그냥요."</span> 오늘도 여기서 대화가 끊깁니다.</span>
+        <span class="problem-sentence"> 더 물어보고 싶은데, 억지로 물어보면 <span class="color-pop">더 닫힐 것 같습니다.</span></span>
+        <span class="problem-sentence"> 아이들은 언어보다 <span class="color-pop">감각</span>으로 먼저 말합니다.</span>
+        <span class="problem-sentence"> 필요한 것은 질문이 아니라 <span class="color-pop">함께하는&nbsp;15분</span>입니다.</span>
       </div>
     </div>
   </section>
@@ -83,129 +88,137 @@
         <h2 class="section-headline js-reveal d1">어떻게 작동하나요?</h2>
       </div>
 
-      <!-- 3-A: Accordion Panels -->
-      <div class="stack-scene">
-        <div class="tech-sub stack-panel">
-          <h3 class="tech-sub-headline js-reveal">아이의 몸이 보내는 신호를 감정의 언어로 바꾸는 과정</h3>
-          <div class="tech-panels">
-            <div class="tech-panel is-active" role="button" tabindex="0" aria-label="1단계: 하루 신호 수집">
-              <div class="tech-panel-num">01</div>
-              <div class="tech-panel-title">하루 신호 수집</div>
-              <p class="tech-panel-desc">팔찌 센서가 심박수(HR), 심박변이도(HRV), 피부전도반응(GSR)을 실시간으로 측정합니다.</p>
-            </div>
-            <div class="tech-panel" role="button" tabindex="0" aria-label="2단계: 노이즈 제거">
-              <div class="tech-panel-num">02</div>
-              <div class="tech-panel-title">노이즈 제거</div>
-              <p class="tech-panel-desc">움직임·외부 환경으로 인한 오염 데이터를 필터링해 신뢰도 높은 생체 지표만 추출합니다.</p>
-            </div>
-            <div class="tech-panel" role="button" tabindex="0" aria-label="3단계: 무드미터 분석">
-              <div class="tech-panel-num">03</div>
-              <div class="tech-panel-title">무드미터 분석</div>
-              <p class="tech-panel-desc">Russell의 원형 감정 모델에 기반해 각성도(Arousal)와 긍정도(Valence) 축으로 아이의 현재 감정 상태를 좌표화합니다.</p>
-            </div>
-            <div class="tech-panel" role="button" tabindex="0" aria-label="4단계: 맞춤 미션 생성">
-              <div class="tech-panel-num">04</div>
-              <div class="tech-panel-title">맞춤 미션 생성</div>
-              <p class="tech-panel-desc">무드미터와 당일 일과 데이터를 결합해 '충전·공유·도전·해소' 4가지 카테고리 중 최적의 미술 미션을 생성합니다.</p>
-            </div>
+      <!-- 3-A: Tech Gallery -->
+      <h3 class="tech-sub-headline js-reveal">아이의 몸이 보내는 신호를 감정의 언어로 바꾸는 과정</h3>
+    </div><!-- /.container -->
+
+    <!-- 갤러리: 풀 블리드 -->
+    <div class="tech-gallery-outer">
+      <div class="tech-gallery-wrap" id="techGalleryWrap">
+        <div class="tech-gallery-track" id="techGalleryTrack">
+          <div class="tech-tile">
+            <div class="tech-tile-img"></div>
+            <p class="tech-tile-text"><strong>하루 신호 수집.</strong> 팔찌 센서가 <mark class="tech-em">심박수(HR), 심박변이도(HRV), 피부전도반응(GSR)</mark>을 실시간으로 측정합니다.</p>
           </div>
-          <div class="tech-note">
-            <strong>왜 아동에게도 유효할까요?</strong> Russell 모델은 성인 기반 연구에서 출발했으나, 아동의 각성-긍정 반응 패턴은 성인과 동일한 2축 구조를 따릅니다. 본 서비스는 초등 저학년 아동 대상 파일럿 데이터를 기반으로 감정 분류 임계값을 별도 보정하였습니다.
+          <div class="tech-tile">
+            <div class="tech-tile-img"></div>
+            <p class="tech-tile-text"><strong>노이즈 제거.</strong> 움직임·외부 환경으로 인한 오염 데이터를 필터링해 <mark class="tech-em">신뢰도 높은 생체 지표만</mark> 추출합니다.</p>
+          </div>
+          <div class="tech-tile">
+            <div class="tech-tile-img"></div>
+            <p class="tech-tile-text"><strong>무드미터 분석.</strong> Russell의 원형 감정 모델에 기반해 <mark class="tech-em">각성도와 긍정도 축으로 아이의 현재 감정 상태를 좌표화</mark>합니다.</p>
+          </div>
+          <div class="tech-tile">
+            <div class="tech-tile-img"></div>
+            <p class="tech-tile-text"><strong>맞춤 미션 생성.</strong> 무드미터와 당일 일과 데이터를 결합해 <mark class="tech-em">'충전·공유·도전·해소' 4가지 카테고리 중 최적의 미술 미션</mark>을 생성합니다.</p>
           </div>
         </div>
       </div>
+      <div class="tech-gallery-nav">
+        <button class="tech-gallery-arrow" id="techGalleryPrev" aria-label="이전" disabled>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="tech-gallery-arrow" id="techGalleryNext" aria-label="다음">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div><!-- /.tech-gallery-outer -->
 
-      <!-- 3-B: Onboarding Slider -->
-      <div class="stack-scene">
-        <div class="tech-sub stack-panel">
-          <h3 class="tech-sub-headline js-reveal">처음이어도 괜찮습니다. 5분이면 충분합니다.</h3>
-          <div class="onboarding-viewport">
-            <div class="onboarding-track" id="onboardingTrack">
-              <div class="onboarding-card">
-                <div class="onboarding-img"></div>
-                <div class="onboarding-content">
-                  <div class="onboarding-num">01</div>
-                  <div class="onboarding-title">앱 설치 &amp; 팔찌 페어링</div>
-                  <p class="onboarding-desc">앱을 설치하고 아이 팔찌와 블루투스로 연결하세요. 이름과 학교 일정만 입력하면 준비 완료입니다.</p>
-                </div>
-              </div>
-              <div class="onboarding-card">
-                <div class="onboarding-img"></div>
-                <div class="onboarding-content">
-                  <div class="onboarding-num">02</div>
-                  <div class="onboarding-title">아이가 착용 &amp; 일상 생활</div>
-                  <p class="onboarding-desc">아이가 팔찌를 차고 평소처럼 생활합니다. 부모가 개입할 필요 없이 데이터는 자동으로 누적됩니다.</p>
-                </div>
-              </div>
-              <div class="onboarding-card">
-                <div class="onboarding-img"></div>
-                <div class="onboarding-content">
-                  <div class="onboarding-num">03</div>
-                  <div class="onboarding-title">보드 앞에서 함께 시작</div>
-                  <p class="onboarding-desc">저녁에 아이와 함께 보드에 손을 올려놓으면, 오늘의 미션이 자동으로 활성화됩니다.</p>
-                </div>
-              </div>
+    <div class="container">
+      <!-- tech-note: 추후 활용
+      <div class="tech-note">
+        <strong>왜 아동에게도 유효할까요?</strong> Russell 모델은 성인 기반 연구에서 출발했으나, 아동의 각성-긍정 반응 패턴은 성인과 동일한 2축 구조를 따릅니다. 본 서비스는 초등 저학년 아동 대상 파일럿 데이터를 기반으로 감정 분류 임계값을 별도 보정하였습니다.
+      </div>
+      -->
+
+      <!-- 3-B: Onboarding Pin -->
+      <div class="onboarding-pin">
+        <div class="onboarding-stage">
+          <h3 class="tech-sub-headline onboarding-headline">처음이어도 괜찮습니다. 5분이면 충분합니다.</h3>
+          <div class="onboarding-panels">
+          <div class="onboarding-panel is-active">
+            <div class="onboarding-left">
+              <div class="onboarding-num">01</div>
+              <div class="onboarding-title">앱 설치 &amp; 팔찌 페어링</div>
+              <p class="onboarding-desc">앱을 설치하고 아이 팔찌와 블루투스로 연결하세요. 이름과 학교 일정만 입력하면 준비 완료입니다.</p>
             </div>
+            <div class="onboarding-img"></div>
           </div>
-          <div class="onboarding-controls">
-            <button class="onboarding-arrow" id="onboardingPrev" aria-label="이전 슬라이드">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
-            <div class="onboarding-nav" id="onboardingDots"></div>
-            <button class="onboarding-arrow" id="onboardingNext" aria-label="다음 슬라이드">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </button>
+          <div class="onboarding-panel">
+            <div class="onboarding-left">
+              <div class="onboarding-num">02</div>
+              <div class="onboarding-title">아이가 착용 &amp; 일상 생활</div>
+              <p class="onboarding-desc">아이가 팔찌를 차고 평소처럼 생활합니다. 부모가 개입할 필요 없이 데이터는 자동으로 누적됩니다.</p>
+            </div>
+            <div class="onboarding-img"></div>
           </div>
-          <div class="faq-grid">
-            <div class="faq-block">
-              <div class="faq-icon">💡</div>
-              <div class="faq-q">팔찌를 깜빡했다면?</div>
-              <p class="faq-a">미착용 시에도 보드 터치 패턴으로 맞춤형 미션을 제안합니다. 매일 착용하지 않아도 괜찮습니다.</p>
+          <div class="onboarding-panel">
+            <div class="onboarding-left">
+              <div class="onboarding-num">03</div>
+              <div class="onboarding-title">보드 앞에서 함께 시작</div>
+              <p class="onboarding-desc">저녁에 아이와 함께 보드에 손을 올려놓으면, 오늘의 미션이 자동으로 활성화됩니다.</p>
             </div>
-            <div class="faq-block">
-              <div class="faq-icon">💡</div>
-              <div class="faq-q">두 아이가 있다면?</div>
-              <p class="faq-a">앱 내에서 자녀를 개별 등록하면 각각의 데이터를 한 화면에서 확인할 수 있습니다.</p>
-            </div>
-            <div class="faq-block">
-              <div class="faq-icon">💡</div>
-              <div class="faq-q">퇴근 시간이 매일 다르다면?</div>
-              <p class="faq-a">앱 알림은 귀가 시점에 맞춰 자동 조정됩니다. 정해진 시간이 없어도 됩니다.</p>
-            </div>
+            <div class="onboarding-img"></div>
+          </div>
+          </div><!-- /.onboarding-panels -->
+          <div class="onboarding-step-dots">
+            <span class="onboarding-step-dot is-active"></span>
+            <span class="onboarding-step-dot"></span>
+            <span class="onboarding-step-dot"></span>
           </div>
         </div>
       </div>
+      <div class="faq-grid">
+        <div class="faq-block">
+          <div class="faq-icon">💡</div>
+          <div class="faq-q">팔찌를 깜빡했다면?</div>
+          <p class="faq-a">미착용 시에도 보드 터치 패턴으로 맞춤형 미션을 제안합니다. 매일 착용하지 않아도 괜찮습니다.</p>
+        </div>
+        <div class="faq-block">
+          <div class="faq-icon">💡</div>
+          <div class="faq-q">두 아이가 있다면?</div>
+          <p class="faq-a">앱 내에서 자녀를 개별 등록하면 각각의 데이터를 한 화면에서 확인할 수 있습니다.</p>
+        </div>
+        <div class="faq-block">
+          <div class="faq-icon">💡</div>
+          <div class="faq-q">퇴근 시간이 매일 다르다면?</div>
+          <p class="faq-a">앱 알림은 귀가 시점에 맞춰 자동 조정됩니다. 정해진 시간이 없어도 됩니다.</p>
+        </div>
+      </div>
 
-      <!-- 3-C: Board Steps -->
-      <div class="stack-scene">
+    </div>
+
+    <!-- 3-C: Board Steps -->
+    <div class="stack-scene stack-scene--board">
+      <div class="container">
         <div class="tech-sub stack-panel" style="margin-bottom:0">
-        <h3 class="tech-sub-headline js-reveal">보드 앞에서 일어나는 15분</h3>
-        <div class="board-steps">
-          <div class="board-step">
-            <div class="step-visual step-visual--1">🖐</div>
-            <div class="step-content">
-              <div class="step-label">STEP 01</div>
-              <div class="step-title">팔찌를 올려봐요</div>
-              <p class="step-body">아이가 스트레처블 디스플레이에 손을 올리면 오늘의 미션 카드가 펼쳐집니다.</p>
+          <h3 class="tech-sub-headline js-reveal">보드 앞에서 일어나는 15분</h3>
+          <div class="board-steps">
+            <div class="board-step">
+              <div class="step-visual step-visual--1"></div>
+              <div class="step-content">
+                <div class="step-label">STEP 01</div>
+                <div class="step-title">팔찌를 올려봐요</div>
+                <p class="step-body">아이가 스트레처블 디스플레이에 손을 올리면 오늘의 미션 카드가 펼쳐집니다.</p>
+              </div>
+            </div>
+            <div class="board-step board-step--rev">
+              <div class="step-visual step-visual--2"></div>
+              <div class="step-content">
+                <div class="step-label">STEP 02</div>
+                <div class="step-title">함께 그려요</div>
+                <p class="step-body">미션 안내에 따라 부모와 아이가 보드 위에서 함께 선을 긋고, 색을 채우고, 이야기를 나눕니다. 앱은 이 순간 대화 가이드를 실시간으로 제공합니다.</p>
+              </div>
+            </div>
+            <div class="board-step">
+              <div class="step-visual step-visual--3"></div>
+              <div class="step-content">
+                <div class="step-label">STEP 03</div>
+                <div class="step-title">오늘이 쌓여요</div>
+                <p class="step-body">오늘의 작품과 감정 데이터가 자동 저장됩니다. 다음 날 앱에서 아이의 감정 흐름 리포트를 확인할 수 있습니다.</p>
+              </div>
             </div>
           </div>
-          <div class="board-step board-step--rev">
-            <div class="step-visual step-visual--2">🎨</div>
-            <div class="step-content">
-              <div class="step-label">STEP 02</div>
-              <div class="step-title">함께 그려요</div>
-              <p class="step-body">미션 안내에 따라 부모와 아이가 보드 위에서 함께 선을 긋고, 색을 채우고, 이야기를 나눕니다. 앱은 이 순간 대화 가이드를 실시간으로 제공합니다.</p>
-            </div>
-          </div>
-          <div class="board-step">
-            <div class="step-visual step-visual--3">📖</div>
-            <div class="step-content">
-              <div class="step-label">STEP 03</div>
-              <div class="step-title">오늘이 쌓여요</div>
-              <p class="step-body">오늘의 작품과 감정 데이터가 자동 저장됩니다. 다음 날 앱에서 아이의 감정 흐름 리포트를 확인할 수 있습니다.</p>
-            </div>
-          </div>
-        </div>
         </div>
       </div>
     </div>
@@ -219,21 +232,21 @@
         <h2 class="section-headline js-reveal d1">제품을 구성하는 네 가지 핵심 기술</h2>
       </div>
       <div class="features-grid">
-        <div class="feature-card liquid-glass">
-          <p class="feature-quote">처음엔 눌러보고 당겨보더니 어느새 마음을 꺼냅니다</p>
+        <div class="feature-card feature-card--1">
           <span class="feature-tag">스트레처블 디스플레이</span>
+          <p class="feature-quote">처음엔 눌러보고 당겨보더니 어느새 마음을 꺼냅니다</p>
         </div>
-        <div class="feature-card liquid-glass">
-          <p class="feature-quote">어제와 오늘의 미션이 다릅니다. 아이의 하루가 달랐기 때문입니다</p>
+        <div class="feature-card feature-card--2">
           <span class="feature-tag">데이터 기반 동적 생성</span>
+          <p class="feature-quote">어제와 오늘의 미션이 다릅니다. 아이의 하루가 달랐기 때문입니다</p>
         </div>
-        <div class="feature-card liquid-glass">
-          <p class="feature-quote">어떤 말을 꺼낼지 몰라도 됩니다. 앱이 가이드를 띄워주니까요</p>
+        <div class="feature-card feature-card--3">
           <span class="feature-tag">실시간 미술치료 대화 가이드</span>
+          <p class="feature-quote">어떤 말을 꺼낼지 몰라도 됩니다. 앱이 가이드를 띄워주니까요</p>
         </div>
-        <div class="feature-card liquid-glass">
-          <p class="feature-quote">오늘이 쌓여 어느 날, 아이를 온전히 이해하는 지도가 됩니다</p>
+        <div class="feature-card feature-card--4">
           <span class="feature-tag">감정 아카이브 리포트</span>
+          <p class="feature-quote">오늘이 쌓여 어느 날, 아이를 온전히 이해하는 지도가 됩니다</p>
         </div>
       </div>
     </div>
