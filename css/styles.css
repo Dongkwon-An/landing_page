@@ -611,7 +611,7 @@ h1, h2, .display-text {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
 .onboarding-headline {
@@ -1489,39 +1489,34 @@ section.stack-panel {
 /* ── Tech Gallery: 2-up 슬라이더 ── */
 
 /* 슬라이더 + 화살표 가로 배치 */
-.tech-gallery-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  margin-bottom: 16px;
+/* 풀 블리드 갤러리 외부 래퍼 — 왼쪽은 container와 정렬, 오른쪽은 뷰포트 끝까지 */
+.tech-gallery-outer {
+  width: 100%;
+  overflow: hidden;
+  padding-left: max(40px, calc((100vw - 1200px) / 2 + 40px));
+  margin: 36px 0 72px;
 }
 
 .tech-gallery-wrap {
-  overflow: hidden;
-  flex: 1;
-  min-width: 0;
+  overflow: visible;
 }
 
 .tech-gallery-track {
   display: flex;
+  gap: 20px;
   will-change: transform;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 페이지: JS가 너비 주입, 내부 2열 */
-.tech-gallery-page {
-  flex-shrink: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-/* Apple 스타일 타일 */
+/* 타일: 2개 + 다음 1/4 peek */
 .tech-tile {
+  flex: 0 0 calc((100vw - max(40px, (100vw - 1200px) / 2 + 40px) - 40px) / 2.25);
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transition: opacity 0.45s ease;
 }
+.tech-tile.is-gallery-dim { opacity: 0.28; }
 
 .tech-tile-img {
   width: 100%;
@@ -1560,12 +1555,13 @@ section.stack-panel {
   font-style: normal;
 }
 
-/* 화살표 묶음: 오른쪽 정렬 */
+/* 화살표: container 우측 정렬 */
 .tech-gallery-nav {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  margin-top: 28px;
+  margin-top: 20px;
+  padding-right: max(40px, calc((100vw - 1200px) / 2 + 40px));
 }
 
 .tech-gallery-arrow {
@@ -1595,15 +1591,17 @@ section.stack-panel {
 }
 
 @media (max-width: 768px) {
-  .tech-gallery-page { grid-template-columns: 1fr; gap: 32px; }
-  .tech-tile-img { aspect-ratio: 16 / 9; }
+  .tech-gallery-outer { padding-left: 24px; }
+  .tech-tile { flex: 0 0 calc(100vw - 80px); } /* 1개 + 오른쪽 peek */
+  .tech-tile-img { aspect-ratio: 4 / 3; }
+  .tech-gallery-nav { padding-right: 24px; }
 }
 
-/* ── Section Headline 크기 상향 ── */
+/* ── Section Headline 크기 ── */
 .section-headline {
-  font-size: clamp(38px, 5vw, 68px);
-  letter-spacing: -1.5px;
-  line-height: 1.18;
+  font-size: clamp(28px, 3.4vw, 48px);
+  letter-spacing: -1.2px;
+  line-height: 1.22;
 }
 
 /* ── Problem ── */
@@ -1621,7 +1619,7 @@ section.stack-panel {
 }
 
 .tech-sub-headline {
-  font-size: clamp(20px, 2.8vw, 36px);
+  font-size: clamp(20px, 2.4vw, 30px);
 }
 
 /* tech-panel-title 줄바꿈 허용 */

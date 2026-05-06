@@ -59,8 +59,20 @@
       autoScrollFired = true;
       setTimeout(function () {
         var tech = document.getElementById('technology');
-        if (tech) window.scrollTo({ top: tech.getBoundingClientRect().top + window.scrollY, behavior: 'smooth' });
-      }, 500);
+        if (!tech) return;
+        var startY    = window.scrollY;
+        var endY      = tech.getBoundingClientRect().top + window.scrollY;
+        var duration  = 2000; /* ms — 느리고 부드럽게 */
+        var startTime = null;
+        function ease(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+        function frame(now) {
+          if (!startTime) startTime = now;
+          var t = Math.min(1, (now - startTime) / duration);
+          window.scrollTo(0, startY + (endY - startY) * ease(t));
+          if (t < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }, 600);
     }
     if (progress < 0.5) autoScrollFired = false; /* 위로 스크롤 시 리셋 */
   }
@@ -69,28 +81,28 @@
   update();
 })();
 
-/* ── S3-A: Tech Gallery 2-up 슬라이더 ── */
+/* ── S3-A: Tech Gallery 타일 슬라이더 ── */
 (function () {
   var wrap    = document.getElementById('techGalleryWrap');
   var track   = document.getElementById('techGalleryTrack');
-  var pages   = Array.from(track ? track.querySelectorAll('.tech-gallery-page') : []);
+  var tiles   = Array.from(track ? track.querySelectorAll('.tech-tile') : []);
   var prevBtn = document.getElementById('techGalleryPrev');
   var nextBtn = document.getElementById('techGalleryNext');
-  if (!wrap || !track || !pages.length) return;
+  if (!wrap || !track || !tiles.length) return;
 
   var page = 0;
+  var GAP  = 20;
 
-  function setup() {
-    var w = wrap.offsetWidth;
-    pages.forEach(function (p) { p.style.width = w + 'px'; });
-    track.style.width = (w * pages.length) + 'px';
-  }
+  function tileStep() { return tiles[0] ? tiles[0].offsetWidth + GAP : 0; }
 
   function slideTo(p) {
-    page = Math.max(0, Math.min(pages.length - 1, p));
-    track.style.transform = 'translateX(-' + (page * wrap.offsetWidth) + 'px)';
+    page = Math.max(0, Math.min(tiles.length - 1, p));
+    track.style.transform = 'translateX(-' + (page * tileStep()) + 'px)';
     prevBtn.disabled = (page === 0);
-    nextBtn.disabled = (page === pages.length - 1);
+    nextBtn.disabled = (page === tiles.length - 1);
+    tiles.forEach(function (tile, i) {
+      tile.classList.toggle('is-gallery-dim', i !== page && i !== page + 1);
+    });
   }
 
   prevBtn.addEventListener('click', function () { slideTo(page - 1); });
@@ -105,14 +117,14 @@
   wrap.addEventListener('touchstart', function (e) {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
-    baseOffset  = page * wrap.offsetWidth;
+    baseOffset  = page * tileStep();
     dragging    = false;
   }, { passive: true });
 
   wrap.addEventListener('touchmove', function (e) {
     var dx = e.touches[0].clientX - touchStartX;
     var dy = e.touches[0].clientY - touchStartY;
-    if (!dragging && Math.abs(dx) < Math.abs(dy)) return; /* 세로 스크롤이면 무시 */
+    if (!dragging && Math.abs(dx) < Math.abs(dy)) return;
     dragging = true;
     track.style.transition = 'none';
     track.style.transform  = 'translateX(' + (-baseOffset + dx * 0.85) + 'px)';
@@ -123,10 +135,11 @@
     dragging = false;
     track.style.transition = '';
     var dx = e.changedTouches[0].clientX - touchStartX;
-    slideTo(Math.abs(dx) > wrap.offsetWidth * 0.18 ? (dx < 0 ? page + 1 : page - 1) : page);
+    var threshold = tileStep() * 0.22;
+    slideTo(Math.abs(dx) > threshold ? (dx < 0 ? page + 1 : page - 1) : page);
   }, { passive: true });
 
-  /* ── 트랙패드 가로 스와이프: 즉시 반응 후 잠금 ── */
+  /* ── 트랙패드 가로 스와이프 ── */
   var wheelLocked = false;
   wrap.addEventListener('wheel', function (e) {
     if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
@@ -139,9 +152,8 @@
     }
   }, { passive: false });
 
-  window.addEventListener('resize', function () { setup(); slideTo(page); }, { passive: true });
+  window.addEventListener('resize', function () { slideTo(page); }, { passive: true });
 
-  setup();
   slideTo(0);
 })();
 
