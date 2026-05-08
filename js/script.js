@@ -54,27 +54,7 @@
       s.classList.toggle('is-lit', i === current);
     });
 
-    /* 마지막 문장 활성화 시 technology 섹션으로 자동 스크롤 */
-    if (current === n - 1 && scrollingDown && !autoScrollFired) {
-      autoScrollFired = true;
-      setTimeout(function () {
-        var tech = document.getElementById('technology');
-        if (!tech) return;
-        var startY    = window.scrollY;
-        var endY      = tech.getBoundingClientRect().top + window.scrollY;
-        var duration  = 2000; /* ms — 느리고 부드럽게 */
-        var startTime = null;
-        function ease(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
-        function frame(now) {
-          if (!startTime) startTime = now;
-          var t = Math.min(1, (now - startTime) / duration);
-          window.scrollTo(0, startY + (endY - startY) * ease(t));
-          if (t < 1) requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
-      }, 600);
-    }
-    if (progress < 0.5) autoScrollFired = false; /* 위로 스크롤 시 리셋 */
+    if (progress < 0.5) autoScrollFired = false;
   }
 
   window.addEventListener('scroll', update, { passive: true });
@@ -202,7 +182,7 @@
       var panel = scene.querySelector('.stack-panel');
       var next  = scenes[i + 1];
       if (!next) { scene.style.minHeight = ''; return; }
-      scene.style.minHeight = (panel.offsetHeight + window.innerHeight * 0.38) + 'px';
+      scene.style.minHeight = (panel.offsetHeight + window.innerHeight * 0.09) + 'px';
     });
   }
 
